@@ -33,7 +33,6 @@ public class InkPageIndicator extends View implements CustomViewPager.OnPageChan
 
     private static final float INVALID_FRACTION = -1f;
     private static final float MINIMAL_REVEAL = 0.00001f;
-    private final Paint selectedPaint;
     private final Path unselectedDotPath;
     private final Path unselectedDotLeftPath;
     private final Path unselectedDotRightPath;
@@ -50,6 +49,7 @@ public class InkPageIndicator extends View implements CustomViewPager.OnPageChan
     private int dotDiameter;
     private int gap;
     private long animDuration;
+    private int selectedColour;
     private int unselectedColour;
     private float dotRadius;
     private float halfDotRadius;
@@ -70,6 +70,7 @@ public class InkPageIndicator extends View implements CustomViewPager.OnPageChan
     private float[] dotRevealFractions;
     private boolean isAttachedToWindow;
     private boolean pageChanging;
+    private Paint selectedPaint;
     private Paint unselectedPaint;
     private Path combinedUnselectedPath;
     private ValueAnimator moveAnimation;
@@ -99,7 +100,7 @@ public class InkPageIndicator extends View implements CustomViewPager.OnPageChan
         animDuration = (long) typedArray.getInteger(R.styleable.InkPageIndicator_animationDuration, DEFAULT_ANIM_DURATION);
         animHalfDuration = animDuration / 2;
         unselectedColour = typedArray.getColor(R.styleable.InkPageIndicator_pageIndicatorColor, DEFAULT_UNSELECTED_COLOUR);
-        int selectedColour = typedArray.getColor(R.styleable.InkPageIndicator_currentPageIndicatorColor, DEFAULT_SELECTED_COLOUR);
+        selectedColour = typedArray.getColor(R.styleable.InkPageIndicator_currentPageIndicatorColor, DEFAULT_SELECTED_COLOUR);
         typedArray.recycle();
 
         unselectedPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -547,8 +548,13 @@ public class InkPageIndicator extends View implements CustomViewPager.OnPageChan
         ViewCompat.postInvalidateOnAnimation(this);
     }
 
-    public void setPageIndicatorColor(int secondaryColor) {
-        unselectedColour = secondaryColor;
+    public void setPageIndicatorColors( int selectedColour, int unselectedColour ) {
+        this.selectedColour = selectedColour;
+        this.unselectedColour = unselectedColour;
+
+        selectedPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        selectedPaint.setColor(selectedColour);
+
         unselectedPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         unselectedPaint.setColor(unselectedColour);
     }

@@ -208,7 +208,8 @@ public abstract class MaterialIntroActivity extends AppCompatActivity {
                         return;
                     }
                 }
-                viewPager.setCurrentItem(adapter.getLastItemPosition(), true);
+                performFinish();
+                // viewPager.setCurrentItem(adapter.getLastItemPosition(), true);
             }
         });
     }
@@ -305,6 +306,11 @@ public abstract class MaterialIntroActivity extends AppCompatActivity {
         showError(message);
     }
 
+    private int pageIndicatorSelectedColor = 0x8000;
+    public void setPageIndicatorSelectedColor( int color ){
+        pageIndicatorSelectedColor = color;
+    }
+
     /**
      * Override to execute this method on finish intro activity
      */
@@ -331,7 +337,7 @@ public abstract class MaterialIntroActivity extends AppCompatActivity {
                 .registerViewTranslationWrapper(backButtonTranslationWrapper)
                 .registerViewTranslationWrapper(pageIndicatorTranslationWrapper)
                 .registerViewTranslationWrapper(viewPagerTranslationWrapper)
-                .registerViewTranslationWrapper(skipButtonTranslationWrapper)
+                //.registerViewTranslationWrapper(skipButtonTranslationWrapper)
 
                 .registerOnPageScrolled(new IPageScrolledListener() {
                     @Override
@@ -449,7 +455,8 @@ public abstract class MaterialIntroActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 getWindow().setStatusBarColor(buttonsColor);
             }
-            pageIndicator.setPageIndicatorColor(buttonsColor);
+
+            pageIndicator.setPageIndicatorColors( pageIndicatorSelectedColor, buttonsColor );
 
             tintButtons(ColorStateList.valueOf(buttonsColor));
         }

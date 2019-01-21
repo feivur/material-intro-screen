@@ -1,6 +1,7 @@
 package agency.tango.materialintro;
 
 import android.Manifest;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.FloatRange;
 import android.support.annotation.Nullable;
@@ -17,6 +18,8 @@ public class IntroActivity extends MaterialIntroActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         enableLastSlideAlphaExitTransition(true);
+
+        setPageIndicatorSelectedColor( Color.GREEN );
 
         getBackButtonTranslationWrapper()
                 .setEnterTranslation(new IViewTranslation() {
