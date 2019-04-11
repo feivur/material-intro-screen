@@ -50,7 +50,11 @@ public class SlidesAdapter extends FragmentStatePagerAdapter {
     }
 
     public boolean shouldLockSlide(int position) {
-        SlideFragment fragment = getItem(position);
-        return !fragment.canMoveFurther() || fragment.hasNeededPermissionsToGrant();
+        try {
+            SlideFragment fragment = getItem(position);
+            return !fragment.canMoveFurther() || fragment.hasNeededPermissionsToGrant();
+        } catch ( Exception e ) {
+            return false;
+        }
     }
 }
