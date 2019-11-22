@@ -4,14 +4,13 @@ import android.animation.ArgbEvaluator;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,6 +19,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import agency.tango.materialintroscreen.adapter.SlidesAdapter;
 import agency.tango.materialintroscreen.animations.ViewTranslationWrapper;
@@ -412,7 +413,7 @@ public abstract class MaterialIntroActivity extends AppCompatActivity {
     }
 
     private void showError(String error) {
-        Snackbar.make(coordinatorLayout, error, Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
+        Snackbar.make(coordinatorLayout, error, Snackbar.LENGTH_SHORT).setCallback( new Snackbar.Callback() {
             @Override
             public void onDismissed(Snackbar snackbar, int event) {
                 navigationView.setTranslationY(0f);
